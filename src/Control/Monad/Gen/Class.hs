@@ -4,7 +4,7 @@
 {-# LANGUAGE UndecidableInstances   #-}
 {-# LANGUAGE CPP   #-}
 module Control.Monad.Gen.Class where
--- Import the non-depricated one
+--  Import the non-depricated one
 #if MIN_VERSION_mtl(2, 2, 1)
 import           Control.Monad.Except
 #else
@@ -12,7 +12,7 @@ import           Control.Monad.Trans.Error
 #endif
 
 import           Control.Monad.Cont
-import           Control.Monad.List
+--import           Control.Monad.List
 import           Control.Monad.RWS
 import           Control.Monad.Reader
 import           Control.Monad.State
