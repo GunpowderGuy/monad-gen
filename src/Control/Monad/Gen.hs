@@ -42,16 +42,19 @@ instance Monad m => MonadGen e (GenT e m) where
 instance Monad m => Monad (GenT e m) where
   return = GenT . return
   (GenT m) >>= f = GenT $ m >>= unGenT . f
+{- 
 instance MonadPlus m =>  MonadPlus (GenT e m) where
   mzero = GenT mzero
   mplus (GenT m) (GenT m') = GenT $ mplus m m'
+-}
 instance (Functor f, Monad f) => Applicative (GenT e f) where
   pure = GenT . pure
   (GenT f) <*> (GenT a) = GenT $ f <*> a
+{-
 instance (Monad m, Functor m, MonadPlus m) => Alternative (GenT e m) where
   empty = mzero
   (<|>) = mplus
-
+-}
 type Gen e = GenT e Identity
 
 instance MonadTrans (GenT e) where
@@ -67,8 +70,10 @@ instance (MonadWriter w m) => MonadWriter w (GenT e m) where
   tell m = lift $ tell m
   listen = GenT . listen . unGenT
   pass   = GenT . pass . unGenT
+{-
 instance MonadFix m => MonadFix (GenT e m) where
   mfix = GenT . mfix . (unGenT .)
+-}
 instance MonadIO m => MonadIO (GenT e m) where
   liftIO = GenT . liftIO
 instance MonadCont m => MonadCont (GenT e m) where
